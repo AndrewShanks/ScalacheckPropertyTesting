@@ -61,8 +61,20 @@ class RomanNumeralConvertorSpec extends FlatSpec with Matchers {
     RomanNumeralConvertor.ArabicToRoman(20) should be ("XX")
   }
 
-  "The Roman numeral convertor" should "convert 30 to XX" in{
+  "The Roman numeral convertor" should "convert 30 to XXX" in{
     RomanNumeralConvertor.ArabicToRoman(30) should be ("XXX")
+  }
+
+  "The Roman numeral convertor" should "convert 62 to LXII" in{
+    RomanNumeralConvertor.ArabicToRoman(62) should be ("LXII")
+  }
+
+  "The Roman numeral convertor" should "convert 99 to XCIX" in{
+    RomanNumeralConvertor.ArabicToRoman(99) should be ("XCIX")
+  }
+
+  "The Roman numeral convertor" should "convert 46 to XLVI" in {
+    RomanNumeralConvertor.ArabicToRoman(46) should be ("XLVI")
   }
 
 

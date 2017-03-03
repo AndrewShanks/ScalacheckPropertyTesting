@@ -8,11 +8,13 @@ object RomanNumeralConvertor {
   val romanFive = "V"
   val romanTen = "X"
   val romanZero = "nulla"
+  val romanFifty = "L"
+  val romanHundred = "C"
   def ArabicToRoman(arabic: Int) :String = {
     arabic match {
       case 0 =>{romanZero}
-      case n :Int if n>0 => {
-        romanTen *tensDigit(n) + unitsToRoman(unitsValue(n))
+      case n :Int if (n>0 )  => {
+        tensToRoman(tensDigit(n)) + unitsToRoman(unitsValue(n))
       }
     }
   }
@@ -26,18 +28,27 @@ object RomanNumeralConvertor {
   }
 
   private def unitsToRoman(unitsDigit:Int):String = {
-    unitsDigit match {
+    digitToRoman(unitsDigit, romanOne, romanFive, romanTen)
+  }
+
+  private def tensToRoman(tensDigit:Int):String = {
+    digitToRoman(tensDigit, romanTen, romanFifty, romanHundred)
+  }
+
+  private def digitToRoman(digit:Int, romanDigit:String, fiveTimes:String, tenTimes:String ) = {
+    digit match {
       case 0 =>{""}
       case n:Int if (n>0  && n< 4) => {
-        romanOne * n
+        romanDigit * n
       }
-      case 4 =>{romanOne + romanFive}
-      case 5 =>{romanFive}
+      case 4 =>{romanDigit + fiveTimes}
+      case 5 =>{fiveTimes}
       case n:Int if (n>5 && n < 9)=>{
-        romanFive + (romanOne * (n-5))
+        fiveTimes + (romanDigit * (n-5))
       }
-      case 9 => {romanOne + romanTen}
+      case 9 => {romanDigit + tenTimes}
     }
+
   }
 
 }

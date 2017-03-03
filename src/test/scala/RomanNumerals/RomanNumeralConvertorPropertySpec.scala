@@ -32,4 +32,9 @@ class RomanNumeralConvertorPropertySpec extends Properties("my property") {
     forAll(Gen.chooseNum(1, 39)) { arabic =>
       RomanNumeralConvertor.ArabicToRoman(arabic).matches("(X){0,3}(I{1,2}|IV|V?(I){0,3}|IX)") == true
     }
+
+  property("no more than 3 Xs together") =
+    forAll(Gen.chooseNum(0, 100)) { arabic =>
+      RomanNumeralConvertor.ArabicToRoman(arabic).contains("XXXX") == false
+    }
 }
