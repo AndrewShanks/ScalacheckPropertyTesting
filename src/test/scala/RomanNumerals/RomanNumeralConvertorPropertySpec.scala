@@ -28,9 +28,14 @@ class RomanNumeralConvertorPropertySpec extends Properties("my property") {
       RomanNumeralConvertor.ArabicToRoman(arabic).contains("VX") == false
     }
 
-  property("A number greater than 0 and less than 39 has up to 3 Xs, followed by one of IV, IX, a V followed by 0-3 Is or just 1-3 Is") =
+  property("A number greater than 0 and less than 40 has up to 3 Xs, followed by one of IV, IX, a V followed by 0-3 Is or just 1-3 Is") =
     forAll(Gen.chooseNum(1, 39)) { arabic =>
-      RomanNumeralConvertor.ArabicToRoman(arabic).matches("(X){0,3}(I{1,2}|IV|V?(I){0,3}|IX)") == true
+      RomanNumeralConvertor.ArabicToRoman(arabic).matches("(X){0,3}(I{1,3}|IV|V?(I){0,3}|IX)") == true
+    }
+
+  property("A number greater than 0 and less than 100 fits the roman numeral regex I don't want to describe here") =
+    forAll(Gen.chooseNum(1, 99)) { arabic =>
+      RomanNumeralConvertor.ArabicToRoman(arabic).matches("I|(XL|L?(X){0,3}|XC)(IV|V?(I){0,3}|IX)") == true
     }
 
   property("no more than 3 Xs together") =
