@@ -14,8 +14,14 @@ object RomanNumeralConvertor {
       case n:Int if (n>0  && n< 10) => {
         unitsToRoman(unitsValue(n))
       }
-      case n:Int if (n>=10) =>{
+      case n:Int if (n>=10 && n<20) =>{
         romanTen + unitsToRoman(unitsValue(n))
+      }
+      case n:Int if (n>=20 && n <30) => {
+        romanTen + romanTen +  unitsToRoman(unitsValue(n))
+      }
+      case n:Int if (n>=30 ) => {
+        romanTen + romanTen + romanTen +  unitsToRoman(unitsValue(n))
       }
 
     }
