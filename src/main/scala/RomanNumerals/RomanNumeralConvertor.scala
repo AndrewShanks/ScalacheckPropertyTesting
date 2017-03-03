@@ -11,24 +11,18 @@ object RomanNumeralConvertor {
   def ArabicToRoman(arabic: Int) :String = {
     arabic match {
       case 0 =>{romanZero}
-      case n:Int if (n>0  && n< 10) => {
-        unitsToRoman(unitsValue(n))
+      case n :Int if n>0 => {
+        romanTen *tensDigit(n) + unitsToRoman(unitsValue(n))
       }
-      case n:Int if (n>=10 && n<20) =>{
-        romanTen + unitsToRoman(unitsValue(n))
-      }
-      case n:Int if (n>=20 && n <30) => {
-        romanTen + romanTen +  unitsToRoman(unitsValue(n))
-      }
-      case n:Int if (n>=30 ) => {
-        romanTen + romanTen + romanTen +  unitsToRoman(unitsValue(n))
-      }
-
     }
   }
 
   private def unitsValue(arabic: Int):Int = {
     arabic % 10
+  }
+
+  private def tensDigit(arabic:Int):Int = {
+    (arabic /10) % 10
   }
 
   private def unitsToRoman(unitsDigit:Int):String = {
