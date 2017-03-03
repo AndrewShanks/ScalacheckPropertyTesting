@@ -41,8 +41,16 @@ class RomanNumeralConvertorSpec extends FlatSpec with Matchers {
     RomanNumeralConvertor.ArabicToRoman(9) should be ("IX")
   }
 
-  "The Roman numeral convertor" should "convert 10 to IX" in {
+  "The Roman numeral convertor" should "convert 10 to X" in {
     RomanNumeralConvertor.ArabicToRoman(10) should be ("X")
+  }
+
+  "The Roman numeral convertor" should "convert 11 to XI" in {
+    RomanNumeralConvertor.ArabicToRoman(11) should be ("XI")
+  }
+
+  "The Roman numeral convertor" should "convert 12 to XII" in {
+    RomanNumeralConvertor.ArabicToRoman(12) should be ("XII")
   }
 
 
