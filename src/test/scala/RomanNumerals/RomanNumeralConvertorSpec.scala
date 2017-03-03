@@ -17,4 +17,33 @@ class RomanNumeralConvertorSpec extends FlatSpec with Matchers {
     RomanNumeralConvertor.ArabicToRoman(0) should be ("nulla")
   }
 
+  "The Roman numeral convertor" should "convert 3 to III" in {
+    RomanNumeralConvertor.ArabicToRoman(3) should be ("III")
+  }
+
+  "The Roman numeral convertor" should "convert 4 to IV" in {
+    RomanNumeralConvertor.ArabicToRoman(4) should be ("IV")
+  }
+
+  "The Roman numeral convertor" should "convert 5 to V" in {
+    RomanNumeralConvertor.ArabicToRoman(5) should be ("V")
+  }
+
+  "The Roman numeral convertor" should "convert 6 to VI" in {
+    RomanNumeralConvertor.ArabicToRoman(6) should be ("VI")
+  }
+
+  "The Roman numeral convertor" should "convert 7 to VII" in {
+    RomanNumeralConvertor.ArabicToRoman(7) should be ("VII")
+  }
+
+  "The Roman numeral convertor" should "convert 9 to IX" in {
+    RomanNumeralConvertor.ArabicToRoman(9) should be ("IX")
+  }
+
+  "The Roman numeral convertor" should "convert 10 to IX" in {
+    RomanNumeralConvertor.ArabicToRoman(10) should be ("X")
+  }
+
+
 }
