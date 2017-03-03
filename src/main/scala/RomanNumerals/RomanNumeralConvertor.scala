@@ -6,7 +6,11 @@ package RomanNumerals
 object RomanNumeralConvertor {
 
   def ArabicToRoman(arabic: Int) :String = {
-    "I"
+    arabic match {
+      case 0 =>{"nulla"}
+      case 1 =>{"I"}
+      case 2 => {"II"}
+    }
   }
 
 }
