@@ -21,44 +21,61 @@ object RomanNumeralConvertor {
     }
   }
 
-  private def unitsValue(arabic: Int):Int = {
+  private def unitsValue(arabic: Int) = {
     arabic % 10
   }
 
-  private def tensDigit(arabic:Int):Int = {
-    (arabic /10) % 10
+  private def tensDigit(arabic:Int) = {
+    extractDigit(arabic, 1)
   }
 
-  private def hundredsDigit(arabic:Int):Int = {
-    (arabic /100) % 10
+  private def hundredsDigit(arabic:Int) = {
+    extractDigit(arabic, 2)
   }
 
-  private def unitsToRoman(unitsDigit:Int):String = {
+  private def unitsToRoman(unitsDigit:Long):String = {
     digitToRoman(unitsDigit, romanOne, romanFive, romanTen)
   }
 
-  private def tensToRoman(tensDigit:Int):String = {
+  private def tensToRoman(tensDigit:Long):String = {
     digitToRoman(tensDigit, romanTen, romanFifty, romanHundred)
   }
 
-  private def hundredsToRoman(hundredsDigit: Int):String = {
+  private def hundredsToRoman(hundredsDigit: Long):String = {
     digitToRoman(hundredsDigit, romanHundred, romanFiveHundred, romanThousand)
   }
 
-  private def digitToRoman(digit:Int, romanDigit:String, fiveTimes:String, tenTimes:String ) = {
+  private def extractDigit(value:Int, place:Int) = {
+    val quotient:Long =  Math.round(Math.pow(10,place))
+    val intermediary:Long = value/quotient
+    val digit = intermediary % 10
+    digit
+  }
+
+  private def digitToRoman(digit:Long, romanDigit:String, fiveTimes:String, tenTimes:String ) = {
     digit match {
       case 0 =>{""}
-      case n:Int if (n>0  && n< 4) => {
-        romanDigit * n
+      case n:Long if (n>0  && n< 4) => {
+        combineSymbols(romanDigit,n)
       }
       case 4 =>{romanDigit + fiveTimes}
       case 5 =>{fiveTimes}
-      case n:Int if (n>5 && n < 9)=>{
-        fiveTimes + (romanDigit * (n-5))
+      case n:Long if (n>5 && n < 9)=>{
+        fiveTimes + combineSymbols(romanDigit, (n-5))
       }
       case 9 => {romanDigit + tenTimes}
     }
 
+  }
+
+  private def combineSymbols(symbol:String,times:Long)= {
+    var i:Long = times
+    val stringBuilder = new StringBuilder
+    while (i > 0){
+      stringBuilder.append(symbol)
+      i = i - 1
+    }
+    stringBuilder.toString()
   }
 
 }
