@@ -28,6 +28,16 @@ class RomanNumeralConvertorPropertySpec extends Properties("my property") {
       RomanNumeralConvertor.ArabicToRoman(arabic).contains("VX") == false
     }
 
+  property("no more than 3 Xs together") =
+    forAll(Gen.chooseNum(0, 100)) { arabic =>
+      RomanNumeralConvertor.ArabicToRoman(arabic).contains("XXXX") == false
+    }
+
+   property("Ls are always solitary") =
+     forAll(Gen.chooseNum(0, 100)) { arabic =>
+       RomanNumeralConvertor.ArabicToRoman(arabic).contains("LL") == false
+     }
+
   property("A number greater than 0 and less than 40 has up to 3 Xs, followed by one of IV, IX, a V followed by 0-3 Is or just 1-3 Is") =
     forAll(Gen.chooseNum(1, 39)) { arabic =>
       RomanNumeralConvertor.ArabicToRoman(arabic).matches("(X){0,3}(I{1,3}|IV|V?(I){0,3}|IX)") == true
