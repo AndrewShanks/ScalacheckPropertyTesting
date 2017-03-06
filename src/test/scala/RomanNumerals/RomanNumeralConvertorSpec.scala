@@ -89,4 +89,8 @@ class RomanNumeralConvertorSpec extends FlatSpec with Matchers {
     RomanNumeralConvertor.ArabicToRoman(972) should be ("CMLXXII")
   }
 
+  "The Roman numeral convertor" should "convert 1000 to M" in {
+    RomanNumeralConvertor.ArabicToRoman(1000) should be ("M")
+  }
+
 }

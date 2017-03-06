@@ -16,7 +16,7 @@ object RomanNumeralConvertor {
     arabic match {
       case 0 =>{romanZero}
       case n :Int if (n>0 )  => {
-        hundredsToRoman(hundredsDigit(n)) + tensToRoman(tensDigit(n)) + unitsToRoman(unitsValue(n))
+        highestDigits(n,3,romanThousand) + hundredsToRoman(hundredsDigit(n)) + tensToRoman(tensDigit(n)) + unitsToRoman(unitsValue(n))
       }
     }
   }
@@ -65,6 +65,10 @@ object RomanNumeralConvertor {
       }
       case 9 => {romanDigit + tenTimes}
     }
+  }
+
+  private def highestDigits(arabic:Int, highestPlace:Int, highestRoman:String) = {
+    combineSymbols(highestRoman,arabic/(Math.round(Math.pow(10,highestPlace))))
 
   }
 
