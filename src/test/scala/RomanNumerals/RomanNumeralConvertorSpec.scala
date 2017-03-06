@@ -77,5 +77,16 @@ class RomanNumeralConvertorSpec extends FlatSpec with Matchers {
     RomanNumeralConvertor.ArabicToRoman(46) should be ("XLVI")
   }
 
+  "The Roman numeral convertor" should "convert 100 to C" in {
+    RomanNumeralConvertor.ArabicToRoman(100) should be ("C")
+  }
+
+  "The Roman numeral convertor" should "convert 520 to DXX" in {
+    RomanNumeralConvertor.ArabicToRoman(520) should be ("DXX")
+  }
+
+  "The Roman numeral convertor" should "convert 972 to CMLXXII" in {
+    RomanNumeralConvertor.ArabicToRoman(972) should be ("CMLXXII")
+  }
 
 }

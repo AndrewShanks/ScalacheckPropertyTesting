@@ -10,11 +10,13 @@ object RomanNumeralConvertor {
   val romanZero = "nulla"
   val romanFifty = "L"
   val romanHundred = "C"
+  val romanFiveHundred = "D"
+  val romanThousand = "M"
   def ArabicToRoman(arabic: Int) :String = {
     arabic match {
       case 0 =>{romanZero}
       case n :Int if (n>0 )  => {
-        tensToRoman(tensDigit(n)) + unitsToRoman(unitsValue(n))
+        hundredsToRoman(hundredsDigit(n)) + tensToRoman(tensDigit(n)) + unitsToRoman(unitsValue(n))
       }
     }
   }
@@ -27,12 +29,20 @@ object RomanNumeralConvertor {
     (arabic /10) % 10
   }
 
+  private def hundredsDigit(arabic:Int):Int = {
+    (arabic /100) % 10
+  }
+
   private def unitsToRoman(unitsDigit:Int):String = {
     digitToRoman(unitsDigit, romanOne, romanFive, romanTen)
   }
 
   private def tensToRoman(tensDigit:Int):String = {
     digitToRoman(tensDigit, romanTen, romanFifty, romanHundred)
+  }
+
+  private def hundredsToRoman(hundredsDigit: Int):String = {
+    digitToRoman(hundredsDigit, romanHundred, romanFiveHundred, romanThousand)
   }
 
   private def digitToRoman(digit:Int, romanDigit:String, fiveTimes:String, tenTimes:String ) = {
