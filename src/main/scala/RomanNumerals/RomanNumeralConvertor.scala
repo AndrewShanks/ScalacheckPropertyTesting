@@ -13,8 +13,6 @@ object RomanNumeralConvertor {
   val romanFiveHundred: Char = 'D'
   val romanThousand: Char = 'M'
 
-  val twoCharacterMappings = List("IV" -> 4, "IX" -> 9, "XL" -> 40, "XC"->90, "CD" -> 400, "CM" -> 900)
-
   def arabicToRoman(arabic: Int) :String = {
     arabic match {
       case 0 =>{romanZero}
@@ -74,6 +72,16 @@ object RomanNumeralConvertor {
     combineSymbols(highestRoman,arabic/(Math.round(Math.pow(10,highestPlace))))
   }
 
+  private def combineSymbols(symbol:Char,times:Long)= {
+    var i:Long = times
+    val stringBuilder = new StringBuilder
+    while (i > 0){
+      stringBuilder.append(symbol)
+      i = i - 1
+    }
+    stringBuilder.toString()
+  }
+
   def romanToArabic(roman: String):Int = {
     def go (total: Int, roman: String):Int = {
       if (roman.length == 0){
@@ -85,6 +93,8 @@ object RomanNumeralConvertor {
     }
     return go(0,roman)
   }
+
+  val twoCharacterMappings = List("IV" -> 4, "IX" -> 9, "XL" -> 40, "XC"->90, "CD" -> 400, "CM" -> 900)
 
   private def extractRelevantSequence(roman:String):String = {
     twoCharacterMappings.foldLeft(roman.charAt(0).toString)(
@@ -98,17 +108,6 @@ object RomanNumeralConvertor {
     } else {
       twoCharacterMappings.foldLeft(0)((total, mapping) => if(mapping._1 == sequence) {mapping._2} else {total})
     }
-  }
-
-
-  private def combineSymbols(symbol:Char,times:Long)= {
-    var i:Long = times
-    val stringBuilder = new StringBuilder
-    while (i > 0){
-      stringBuilder.append(symbol)
-      i = i - 1
-    }
-    stringBuilder.toString()
   }
 
   private def getRomanDigitValue(digit:Char) :Int = {

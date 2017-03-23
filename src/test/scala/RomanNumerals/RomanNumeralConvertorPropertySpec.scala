@@ -33,6 +33,16 @@ class RomanNumeralConvertorPropertySpec extends Properties("my property") {
        RomanNumeralConvertor.arabicToRoman(arabic).contains("LL") == false
      }
 
+  property("A number with a units value of 4 ends in IV") =
+    forAll(Gen.chooseNum(0,100).map(n => n*10 +4)) { arabic =>
+      RomanNumeralConvertor.arabicToRoman(arabic).endsWith("IV") == true
+    }
+
+  property("A number with a units value of 9 ends in IX") =
+    forAll(Gen.chooseNum(0,330).map(n => n*10 + 9)) { arabic =>
+      RomanNumeralConvertor.arabicToRoman(arabic).endsWith("IX") == true
+    }
+
   property("A number greater than 0 and less than 40 has up to 3 Xs, followed by one of IV, IX, a V followed by 0-3 Is or just 1-3 Is") =
     forAll(Gen.chooseNum(1, 39)) { arabic =>
       RomanNumeralConvertor.arabicToRoman(arabic).matches("(X){0,3}(I{1,3}|IV|V?((I){0,3})|IX)") == true
