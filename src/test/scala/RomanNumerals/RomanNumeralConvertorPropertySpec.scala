@@ -43,6 +43,10 @@ class RomanNumeralConvertorPropertySpec extends Properties("my property") {
       RomanNumeralConvertor.arabicToRoman(arabic).endsWith("IX") == true
     }
 
+  property("Converting arabic to roman and back results in what you started with ")=
+    forAll(Gen.chooseNum(1,3999).map(n => n*10 + 9)) { arabic =>
+      RomanNumeralConvertor.romanToArabic(RomanNumeralConvertor.arabicToRoman(arabic)) == arabic
+    }
   property("A number greater than 0 and less than 40 has up to 3 Xs, followed by one of IV, IX, a V followed by 0-3 Is or just 1-3 Is") =
     forAll(Gen.chooseNum(1, 39)) { arabic =>
       RomanNumeralConvertor.arabicToRoman(arabic).matches("(X){0,3}(I{1,3}|IV|V?((I){0,3})|IX)") == true
